@@ -1,1 +1,48 @@
 @import "tailwindcss";
+
+:root {
+  --bg: #F7F6F3;
+  --fg: #0A0A0A;
+  --fg-mid: rgba(10,10,10,0.42);
+  --fg-dim: rgba(10,10,10,0.18);
+  --border: rgba(10,10,10,0.11);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0D0D0D;
+    --fg: #F2F1EE;
+    --fg-mid: rgba(242,241,238,0.42);
+    --fg-dim: rgba(242,241,238,0.18);
+    --border: rgba(242,241,238,0.11);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0D0D0D;
+  --fg: #F2F1EE;
+  --fg-mid: rgba(242,241,238,0.42);
+  --fg-dim: rgba(242,241,238,0.18);
+  --border: rgba(242,241,238,0.11);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { height: 100%; }
+body {
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Inter', -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; } 50% { opacity: 0.25; }
+}
