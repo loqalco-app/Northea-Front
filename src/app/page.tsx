@@ -1,16 +1,9 @@
 import ProductGrid from '@/components/ProductGrid'
+import type { ProductT, CategoryT } from '@/lib/types'
 
 export const dynamic = 'force-dynamic'
 
-interface Variant { id: string; name: string; sku: string; sale_price: number; regular_price: number | null; status: string }
-interface Image { url: string; is_primary: boolean; sort_order: number; alt_text: string | null }
-interface Product {
-  id: string; name: string; slug: string; description: string | null; created_at: string
-  product_variants: Variant[]; product_images: Image[]; category_ids: string[]
-}
-interface Category { id: string; parent_id: string | null; name: string; slug: string }
-
-async function getCatalog(): Promise<{ products: Product[]; categories: Category[]; featured: Product[] }> {
+async function getCatalog(): Promise<{ products: ProductT[]; categories: CategoryT[]; featured: ProductT[] }> {
   const base = process.env.NEXT_PUBLIC_ERP_URL
   const org = process.env.NEXT_PUBLIC_STORE_ORG_ID
   if (!base || !org) return { products: [], categories: [], featured: [] }
