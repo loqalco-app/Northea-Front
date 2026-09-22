@@ -28,10 +28,10 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
   return (
     <>
       <style>{`
-        .hero-wrap{padding:24px 36px 0;display:flex;justify-content:center}
-        @media(max-width:768px){.hero-wrap{padding:16px 20px 0}}
+        .hero-wrap{padding:32px 36px 28px;display:flex;justify-content:center}
+        @media(max-width:768px){.hero-wrap{padding:24px 20px 20px}}
         .hero-word{width:min(900px,92%);height:auto;display:block}
-        .hero-rule{height:1px;background:var(--fg);margin:0 36px 0}
+        .hero-rule{height:1px;background:var(--fg);margin:0 36px}
         @media(max-width:768px){.hero-rule{margin:0 20px}}
         .strip{display:grid;grid-template-columns:1.1fr .8fr 1fr;gap:32px;padding:28px 36px 48px;align-items:start}
         @media(max-width:860px){.strip{grid-template-columns:1fr;gap:20px;padding:22px 20px 36px}}
