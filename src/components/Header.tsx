@@ -35,7 +35,7 @@ export default function Header({ categories }: { categories: Category[] }) {
       <header className="hdr">
         <Link href="/" className="hdr-mark"><img src="/logo-lockup.png" alt="NORTHÉA" /></Link>
         <nav className="hdr-nav">
-          <Link href="/" className="hdr-link">Shop</Link>
+          <Link href="/" className="hdr-link">Home</Link>
           {roots.map(c => <Link key={c.id} href={`/?categoria=${c.slug}`} className="hdr-link">{c.name}</Link>)}
         </nav>
         <div className="hdr-actions">
@@ -49,7 +49,7 @@ export default function Header({ categories }: { categories: Category[] }) {
         </div>
       </header>
       <div className={`hdr-mobile${menuOpen ? ' open' : ''}`}>
-        <Link href="/" onClick={() => setMenuOpen(false)}>Shop</Link>
+        <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
         {roots.map(c => <Link key={c.id} href={`/?categoria=${c.slug}`} onClick={() => setMenuOpen(false)}>{c.name}</Link>)}
       </div>
     </>
