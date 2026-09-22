@@ -24,6 +24,8 @@ interface CartContextValue {
   addItem: (item: Omit<CartItem, 'qty' | 'reservationId'>, qty?: number) => Promise<void>
   updateQty: (variantId: string, qty: number) => Promise<void>
   removeItem: (variantId: string) => Promise<void>
+  clearCart: () => void
+  sessionId: string
   lastError: string | null
 }
 
@@ -113,6 +115,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const removeItem = useCallback(async (variantId: string) => { await removeItemInternal(variantId) }, [])
 
+  const clearCart = useCallback(() => { setItems([]) }, [])
+
   const count = items.reduce((n, i) => n + i.qty, 0)
   const total = items.reduce((n, i) => n + i.qty * i.price, 0)
 
@@ -121,7 +125,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       items, count, total, drawerOpen,
       openDrawer: () => setDrawerOpen(true),
       closeDrawer: () => setDrawerOpen(false),
-      addItem, updateQty, removeItem, lastError,
+      addItem, updateQty, removeItem, clearCart, sessionId: sessionIdRef.current, lastError,
     }}>
       {children}
     </CartContext.Provider>

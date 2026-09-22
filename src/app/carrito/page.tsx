@@ -40,8 +40,9 @@ export default function CartPage() {
         .cart-err{background:#FEF2F2;color:#B91C1C;font-size:13px;padding:12px 16px;border-radius:6px;margin-bottom:16px}
         .cart-summary{margin-top:28px;padding-top:20px}
         .cart-total-row{display:flex;justify-content:space-between;font-size:16px;font-weight:700;color:var(--fg);margin-bottom:20px}
-        .cart-checkout{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:16px;background:#25D366;color:white;border:none;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;border-radius:2px;text-decoration:none}
-        .cart-checkout-note{font-size:12px;color:var(--fg-mid);text-align:center;margin-top:12px;line-height:1.6}
+        .cart-checkout{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:16px;border:none;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;border-radius:2px;text-decoration:none}
+        .cart-checkout-pay{background:var(--fg);color:var(--bg)}
+        .cart-wa-alt{display:block;text-align:center;margin-top:14px;font-size:12px;color:var(--fg-mid);text-decoration:underline}
         .cart-continue{display:block;text-align:center;margin-top:16px;font-size:12px;color:var(--fg-mid);text-decoration:underline}
       `}</style>
       <div className="cart-page">
@@ -78,15 +79,12 @@ export default function CartPage() {
             ))}
             <div className="cart-summary">
               <div className="cart-total-row"><span>Total</span><span>{fmt(total)}</span></div>
-              {WA_PHONE ? (
-                <a className="cart-checkout" href={buildWhatsAppLink()} target="_blank" rel="noopener noreferrer">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-1.746-.873-2.893-1.554-4.044-3.522-.306-.525.306-.487.874-1.622.098-.198.05-.371-.05-.52-.099-.148-.669-1.611-.916-2.204-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.04 3.13 5.007 4.27 2.482.986 2.982.79 3.522.74.54-.049 1.758-.72 2.006-1.414.248-.694.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347z"/><path d="M12.014 0C5.406 0 .049 5.357.049 11.965c0 2.31.647 4.532 1.87 6.461L.049 24l5.756-1.827a11.9 11.9 0 0 0 6.21 1.802h.005c6.608 0 11.965-5.357 11.965-11.965S18.622.045 12.014.045zm.005 21.891h-.005a9.9 9.9 0 0 1-5.05-1.386l-.362-.216-3.766 1.197 1.216-3.671-.236-.377a9.895 9.895 0 0 1-1.517-5.289c0-5.472 4.454-9.925 9.925-9.925 2.651 0 5.14 1.033 7.014 2.909a9.858 9.858 0 0 1 2.906 7.021c0 5.472-4.454 9.925-9.925 9.925z"/></svg>
-                  Finalizar por WhatsApp
+              <Link href="/checkout" className="cart-checkout cart-checkout-pay">Continuar a pagar</Link>
+              {WA_PHONE && (
+                <a className="cart-wa-alt" href={buildWhatsAppLink()} target="_blank" rel="noopener noreferrer">
+                  ¿Prefieres coordinar por WhatsApp?
                 </a>
-              ) : (
-                <div className="cart-err">Falta configurar el número de WhatsApp para recibir pedidos.</div>
               )}
-              <div className="cart-checkout-note">Pago con tarjeta próximamente. Por ahora confirmamos tu pedido y coordinamos el pago por WhatsApp.</div>
               <Link href="/" className="cart-continue">Seguir comprando</Link>
             </div>
           </>
