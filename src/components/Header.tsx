@@ -15,7 +15,9 @@ export default function Header({ categories }: { categories: Category[] }) {
       <style>{`
         .hdr{display:flex;align-items:center;justify-content:space-between;padding:20px 36px;background:var(--bg)}
         @media(max-width:768px){.hdr{padding:16px 20px}}
-        .hdr-mark{width:34px;height:34px;background:var(--fg);color:var(--bg);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;text-decoration:none;flex-shrink:0}
+        .hdr-mark{display:flex;align-items:center;flex-shrink:0}
+        .hdr-mark img{height:28px;width:auto;display:block}
+        @media(max-width:480px){.hdr-mark img{height:24px}}
         .hdr-nav{display:flex;align-items:center;gap:32px}
         @media(max-width:860px){.hdr-nav{display:none}}
         .hdr-link{font-size:14px;font-weight:500;color:var(--fg);text-decoration:none;transition:opacity .15s}
@@ -31,7 +33,7 @@ export default function Header({ categories }: { categories: Category[] }) {
         .hdr-mobile a:last-child{border-bottom:none}
       `}</style>
       <header className="hdr">
-        <Link href="/" className="hdr-mark">N</Link>
+        <Link href="/" className="hdr-mark"><img src="/logo-lockup.png" alt="NORTHÉA" /></Link>
         <nav className="hdr-nav">
           <Link href="/" className="hdr-link">Shop</Link>
           {roots.map(c => <Link key={c.id} href={`/?categoria=${c.slug}`} className="hdr-link">{c.name}</Link>)}
