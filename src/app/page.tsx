@@ -10,19 +10,19 @@ interface Product {
 }
 interface Category { id: string; parent_id: string | null; name: string; slug: string }
 
-async function getCatalog(): Promise<{ products: Product[]; categories: Category[] }> {
+async function getCatalog(): Promise<{ products: Product[]; categories: Category[]; featured: Product[] }> {
   const base = process.env.NEXT_PUBLIC_ERP_URL
   const org = process.env.NEXT_PUBLIC_STORE_ORG_ID
-  if (!base || !org) return { products: [], categories: [] }
+  if (!base || !org) return { products: [], categories: [], featured: [] }
   try {
     const res = await fetch(`${base}/api/store/products?org=${org}`, { cache: 'no-store' })
-    if (!res.ok) return { products: [], categories: [] }
+    if (!res.ok) return { products: [], categories: [], featured: [] }
     return res.json()
-  } catch { return { products: [], categories: [] } }
+  } catch { return { products: [], categories: [], featured: [] } }
 }
 
 export default async function HomePage({ searchParams }: { searchParams: Promise<{ categoria?: string }> }) {
-  const { products, categories } = await getCatalog()
+  const { products, categories, featured } = await getCatalog()
   const { categoria } = await searchParams
 
   return (
@@ -63,7 +63,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
         </div>
       </div>
 
-      <ProductGrid products={products} categories={categories} initialCategory={categoria ?? 'all'} />
+      <ProductGrid products={products} featured={featured} categories={categories} initialCategory={categoria ?? 'all'} />
     </>
   )
 }

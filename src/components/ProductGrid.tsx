@@ -20,7 +20,7 @@ function isNew(createdAt: string) {
 
 const ERP = process.env.NEXT_PUBLIC_ERP_URL
 
-export default function ProductGrid({ products, categories, initialCategory }: { products: Product[]; categories: Category[]; initialCategory: string }) {
+export default function ProductGrid({ products, featured, categories, initialCategory }: { products: Product[]; featured: Product[]; categories: Category[]; initialCategory: string }) {
   const { addItem } = useCart()
   const [activeCat, setActiveCat] = useState(initialCategory)
   const [sort, setSort] = useState<'featured' | 'price-asc' | 'price-desc'>('featured')
@@ -37,15 +37,19 @@ export default function ProductGrid({ products, categories, initialCategory }: {
   }, [products])
 
   const filtered = useMemo(() => {
-    let list = activeCat === 'all' ? products : products.filter(p => {
-      const cat = categories.find(c => c.slug === activeCat)
-      return cat && p.category_ids.includes(cat.id)
-    })
+    // "Todo" shows the curated Home selection when one exists; any specific
+    // category tab always browses the full catalog for that category.
+    let list = activeCat === 'all'
+      ? (featured.length > 0 ? featured : products)
+      : products.filter(p => {
+          const cat = categories.find(c => c.slug === activeCat)
+          return cat && p.category_ids.includes(cat.id)
+        })
     const priceOf = (p: Product) => Math.min(...p.product_variants.map(v => v.sale_price))
     if (sort === 'price-asc') list = [...list].sort((a, b) => priceOf(a) - priceOf(b))
     if (sort === 'price-desc') list = [...list].sort((a, b) => priceOf(b) - priceOf(a))
     return list
-  }, [products, activeCat, sort, categories])
+  }, [products, featured, activeCat, sort, categories])
 
   function productStock(p: Product) {
     return p.product_variants.reduce((n, v) => n + (stock[v.id] ?? 0), 0)
