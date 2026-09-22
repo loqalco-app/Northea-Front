@@ -6,6 +6,8 @@
   --fg-mid: rgba(10,10,10,0.42);
   --fg-dim: rgba(10,10,10,0.18);
   --border: rgba(10,10,10,0.11);
+  --accent: #C1272D;
+  --surface: #FFFFFF;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -14,6 +16,8 @@
     --fg-mid: rgba(242,241,238,0.42);
     --fg-dim: rgba(242,241,238,0.18);
     --border: rgba(242,241,238,0.11);
+    --accent: #E5484D;
+    --surface: #171717;
   }
 }
 :root[data-theme="dark"] {
@@ -22,6 +26,8 @@
   --fg-mid: rgba(242,241,238,0.42);
   --fg-dim: rgba(242,241,238,0.18);
   --border: rgba(242,241,238,0.11);
+  --accent: #E5484D;
+  --surface: #171717;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
