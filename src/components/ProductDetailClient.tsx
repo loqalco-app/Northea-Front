@@ -86,7 +86,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
         .pd-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(26px,4vw,38px);letter-spacing:.01em;color:var(--fg);line-height:1.05}
         .pd-price-row{display:flex;align-items:baseline;gap:10px;margin:14px 0 6px}
         .pd-price{font-size:22px;font-weight:700;color:var(--fg)}
-        .pd-price-reg{font-size:15px;color:var(--fg-dim);text-decoration:line-through}
+        .pd-price-reg{font-size:15px;color:var(--fg);text-decoration:line-through}
         .pd-disc-badge{background:var(--accent);color:white;font-size:11px;font-weight:800;padding:3px 8px;border-radius:4px}
         .pd-desc{font-size:13.5px;color:var(--fg-mid);line-height:1.7;margin:16px 0 22px;max-width:440px}
         .pd-section-lbl{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-mid);margin-bottom:10px}

@@ -30,13 +30,13 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
       <style>{`
         .hero-wrap{padding:0 36px}
         @media(max-width:768px){.hero-wrap{padding:0 20px}}
-        .hero-word{font-family:'Inter',sans-serif;font-weight:900;font-size:clamp(58px,13.5vw,208px);line-height:.86;letter-spacing:-.03em;color:var(--fg);white-space:nowrap;text-align:center;width:100%;overflow:hidden}
+        .hero-word{font-family:'Inter',sans-serif;font-weight:900;font-size:clamp(58px,13.5vw,208px);line-height:1.05;letter-spacing:-.03em;color:var(--fg);white-space:nowrap;text-align:center;width:100%;overflow:hidden;padding-top:.08em}
         .hero-rule{height:1px;background:var(--fg);margin:0 36px 0}
         @media(max-width:768px){.hero-rule{margin:0 20px}}
         .strip{display:grid;grid-template-columns:1.1fr .8fr 1fr;gap:32px;padding:28px 36px 48px;align-items:start}
         @media(max-width:860px){.strip{grid-template-columns:1fr;gap:20px;padding:22px 20px 36px}}
         .strip-eyebrow{font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-mid);margin-bottom:10px}
-        .strip-copy{font-size:13.5px;color:var(--fg);line-height:1.65;max-width:340px}
+        .strip-copy{font-size:13.5px;color:var(--fg);line-height:1.65;max-width:420px}
         .strip-center{text-align:center;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-mid);align-self:center}
         @media(max-width:860px){.strip-center{text-align:left}}
         .strip-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
@@ -54,7 +54,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
       <div className="strip">
         <div>
           <div className="strip-eyebrow">Our Philosophy</div>
-          <p className="strip-copy">Ropa, artículos y belleza de USA — todo nuevo y original. Piezas seleccionadas con propósito, disponibilidad real, sin sorpresas.</p>
+          <p className="strip-copy">Ropa, artículos y belleza de USA — todo nuevo y original.<br />Piezas con propósito, disponibilidad real, sin sorpresas.</p>
         </div>
         <div className="strip-center">NORTHÉA · EST. 2026</div>
         <div className="strip-right">

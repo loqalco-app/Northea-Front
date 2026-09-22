@@ -91,7 +91,7 @@ export default function ProductGrid({ products, categories, initialCategory }: {
         .pg-name{font-size:13.5px;font-weight:600;color:var(--fg);line-height:1.3}
         .pg-price-wrap{display:flex;align-items:baseline;gap:6px;flex-shrink:0;white-space:nowrap}
         .pg-price{font-size:13.5px;font-weight:700;color:var(--fg);font-variant-numeric:tabular-nums}
-        .pg-price-reg{font-size:11px;color:var(--fg-dim);text-decoration:line-through;font-variant-numeric:tabular-nums}
+        .pg-price-reg{font-size:11px;color:var(--fg);text-decoration:line-through;font-variant-numeric:tabular-nums}
         .pg-empty{padding:100px 20px;text-align:center;color:var(--fg-mid);font-size:14px}
       `}</style>
 
