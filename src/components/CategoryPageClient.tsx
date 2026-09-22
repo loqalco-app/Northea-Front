@@ -58,10 +58,12 @@ export default function CategoryPageClient({ category, categories, products }: {
         .cat-layout{display:grid;grid-template-columns:200px 1fr;gap:36px;padding:0 36px 80px;align-items:start}
         @media(max-width:860px){.cat-layout{grid-template-columns:1fr;padding:0 20px 60px;gap:20px}}
 
-        .cat-sidebar{display:flex;flex-direction:column;gap:2px;position:sticky;top:90px}
-        @media(max-width:860px){.cat-sidebar{position:static;flex-direction:row;overflow-x:auto;gap:8px;padding-bottom:8px;border-bottom:1px solid var(--border)}}
-        .cat-side-link{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 4px;font-size:13.5px;font-weight:500;color:var(--fg-mid);background:none;border:none;cursor:pointer;text-align:left;white-space:nowrap;border-bottom:1px solid transparent}
-        .cat-side-link.active{color:var(--fg);font-weight:700}
+        .cat-sidebar{display:flex;flex-direction:column;gap:2px;position:sticky;top:90px;background:var(--surface);border-radius:10px;padding:16px 14px}
+        @media(max-width:860px){.cat-sidebar{position:static;border-radius:0;background:none;padding:0 0 12px;flex-direction:row;overflow-x:auto;gap:8px;border-bottom:1px solid var(--border)}}
+        .cat-sidebar-lbl{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-mid);margin-bottom:10px;padding:0 4px}
+        @media(max-width:860px){.cat-sidebar-lbl{display:none}}
+        .cat-side-link{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 8px;border-radius:6px;font-size:13.5px;font-weight:500;color:var(--fg-mid);background:none;border:none;cursor:pointer;text-align:left;white-space:nowrap}
+        .cat-side-link.active{color:var(--fg);font-weight:700;background:var(--bg)}
         @media(max-width:860px){.cat-side-link{padding:6px 12px;border:1px solid var(--border);border-radius:50px}.cat-side-link.active{background:var(--fg);color:var(--bg);border-color:var(--fg)}}
         .cat-side-count{font-size:11px;color:var(--fg-dim);font-variant-numeric:tabular-nums}
         @media(max-width:860px){.cat-side-count{display:none}}
@@ -81,6 +83,7 @@ export default function CategoryPageClient({ category, categories, products }: {
 
       <div className="cat-layout">
         <aside className="cat-sidebar">
+          <div className="cat-sidebar-lbl">Categorías</div>
           <button className={`cat-side-link${activeSub === 'all' ? ' active' : ''}`} onClick={() => setActiveSub('all')}>
             <span>Todo</span><span className="cat-side-count">{inCategory.length}</span>
           </button>
