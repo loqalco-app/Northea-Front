@@ -73,7 +73,8 @@ export default function ProductDetailClient({ product }: { product: Product }) {
       <style>{`
         .pd-wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:32px 36px 80px;align-items:start}
         @media(max-width:860px){.pd-wrap{grid-template-columns:1fr;gap:20px;padding:16px 20px 60px}}
-        .pd-gallery-main{aspect-ratio:3/4;background:var(--border);overflow:hidden}
+        .pd-gallery-main{position:relative;aspect-ratio:3/4;background:var(--border);overflow:hidden}
+        .pd-gallery-disc{position:absolute;top:14px;left:14px;background:var(--accent);color:white;font-size:13px;font-weight:800;padding:5px 10px;border-radius:4px;z-index:1}
         .pd-gallery-main img{width:100%;height:100%;object-fit:cover;display:block}
         .pd-gallery-thumbs{display:flex;gap:8px;margin-top:10px;overflow-x:auto}
         .pd-thumb{width:64px;height:80px;flex-shrink:0;background:var(--border);overflow:hidden;cursor:pointer;opacity:.55;transition:opacity .15s}
@@ -107,6 +108,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
       <div className="pd-wrap">
         <div>
           <div className="pd-gallery-main">
+            {discPct !== null && <span className="pd-gallery-disc">-{discPct}%</span>}
             {images[activeImgIdx] ? <img src={images[activeImgIdx].url} alt={product.name} /> : null}
           </div>
           {images.length > 1 && (

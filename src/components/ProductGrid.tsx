@@ -82,8 +82,7 @@ export default function ProductGrid({ products, categories, initialCategory }: {
         .pg-noimg{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-dim)}
         .pg-tag{position:absolute;top:10px;left:10px;background:var(--surface);color:var(--fg);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:50px}
         .pg-disc-tag{position:absolute;top:10px;left:10px;background:var(--accent);color:white;font-size:11px;font-weight:800;padding:4px 8px;border-radius:4px}
-        .pg-sold-out{position:absolute;inset:0;background:rgba(255,255,255,0.55);display:flex;align-items:center;justify-content:center}
-        :root[data-theme="dark"] .pg-sold-out, :root:not([data-theme="light"]) .pg-sold-out { background: rgba(13,13,13,0.55); }
+        .pg-sold-out{position:absolute;inset:0;background:rgba(255,255,255,0.62);display:flex;align-items:center;justify-content:center}
         .pg-sold-out span{background:var(--fg);color:var(--bg);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;border-radius:50px}
         .pg-add{position:absolute;bottom:10px;right:10px;width:36px;height:36px;border-radius:50%;background:var(--surface);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.15);color:var(--fg);transition:transform .12s}
         .pg-add:hover{transform:scale(1.08)}

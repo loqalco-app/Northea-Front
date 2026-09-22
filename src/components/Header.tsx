@@ -13,27 +13,27 @@ export default function Header({ categories }: { categories: Category[] }) {
   return (
     <>
       <style>{`
-        .hdr{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:16px 36px}
-        @media(max-width:768px){.hdr{padding:14px 20px}}
-        .hdr-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.16em;color:var(--fg);text-decoration:none}
-        .hdr-nav{display:flex;align-items:center;gap:28px}
+        .hdr{display:flex;align-items:center;justify-content:space-between;padding:20px 36px;background:var(--bg)}
+        @media(max-width:768px){.hdr{padding:16px 20px}}
+        .hdr-mark{width:34px;height:34px;background:var(--fg);color:var(--bg);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;text-decoration:none;flex-shrink:0}
+        .hdr-nav{display:flex;align-items:center;gap:32px}
         @media(max-width:860px){.hdr-nav{display:none}}
-        .hdr-link{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-mid);text-decoration:none;transition:color .15s}
-        .hdr-link:hover,.hdr-link.active{color:var(--fg)}
-        .hdr-actions{display:flex;align-items:center;gap:14px}
+        .hdr-link{font-size:14px;font-weight:500;color:var(--fg);text-decoration:none;transition:opacity .15s}
+        .hdr-link:hover,.hdr-link.active{opacity:.55}
+        .hdr-actions{display:flex;align-items:center;gap:16px}
         .hdr-cart-btn{position:relative;background:none;border:none;cursor:pointer;padding:6px;color:var(--fg);display:flex}
         .hdr-cart-badge{position:absolute;top:-2px;right:-2px;background:var(--accent);color:white;font-size:10px;font-weight:800;width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center}
         .hdr-burger{display:none;background:none;border:none;cursor:pointer;padding:6px;color:var(--fg)}
         @media(max-width:860px){.hdr-burger{display:flex}}
-        .hdr-mobile{display:none;flex-direction:column;padding:8px 20px 20px;border-bottom:1px solid var(--border);background:var(--bg)}
+        .hdr-mobile{display:none;flex-direction:column;padding:8px 20px 20px;background:var(--bg)}
         .hdr-mobile.open{display:flex}
         .hdr-mobile a{padding:12px 0;font-size:14px;font-weight:600;color:var(--fg);text-decoration:none;border-bottom:1px solid var(--border)}
         .hdr-mobile a:last-child{border-bottom:none}
       `}</style>
       <header className="hdr">
-        <Link href="/" className="hdr-logo">NORTHÉA</Link>
+        <Link href="/" className="hdr-mark">N</Link>
         <nav className="hdr-nav">
-          <Link href="/" className="hdr-link">Todo</Link>
+          <Link href="/" className="hdr-link">Shop</Link>
           {roots.map(c => <Link key={c.id} href={`/?categoria=${c.slug}`} className="hdr-link">{c.name}</Link>)}
         </nav>
         <div className="hdr-actions">
@@ -47,7 +47,7 @@ export default function Header({ categories }: { categories: Category[] }) {
         </div>
       </header>
       <div className={`hdr-mobile${menuOpen ? ' open' : ''}`}>
-        <Link href="/" onClick={() => setMenuOpen(false)}>Todo</Link>
+        <Link href="/" onClick={() => setMenuOpen(false)}>Shop</Link>
         {roots.map(c => <Link key={c.id} href={`/?categoria=${c.slug}`} onClick={() => setMenuOpen(false)}>{c.name}</Link>)}
       </div>
     </>

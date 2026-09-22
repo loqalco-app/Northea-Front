@@ -1,33 +1,14 @@
 @import "tailwindcss";
 
+/* NORTHÉA brand: fixed white/black identity — no adaptive dark mode. */
 :root {
-  --bg: #F7F6F3;
+  --bg: #FFFFFF;
   --fg: #0A0A0A;
-  --fg-mid: rgba(10,10,10,0.42);
-  --fg-dim: rgba(10,10,10,0.18);
-  --border: rgba(10,10,10,0.11);
-  --accent: #C1272D;
-  --surface: #FFFFFF;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0D0D0D;
-    --fg: #F2F1EE;
-    --fg-mid: rgba(242,241,238,0.42);
-    --fg-dim: rgba(242,241,238,0.18);
-    --border: rgba(242,241,238,0.11);
-    --accent: #E5484D;
-    --surface: #171717;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0D0D0D;
-  --fg: #F2F1EE;
-  --fg-mid: rgba(242,241,238,0.42);
-  --fg-dim: rgba(242,241,238,0.18);
-  --border: rgba(242,241,238,0.11);
-  --accent: #E5484D;
-  --surface: #171717;
+  --fg-mid: rgba(10,10,10,0.48);
+  --fg-dim: rgba(10,10,10,0.22);
+  --border: rgba(10,10,10,0.12);
+  --accent: #D62828;
+  --surface: #F4F3F1;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }

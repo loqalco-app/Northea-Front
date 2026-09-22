@@ -28,15 +28,41 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
   return (
     <>
       <style>{`
-        .home-hero{padding:56px 36px 40px}
-        @media(max-width:768px){.home-hero{padding:36px 20px 28px}}
-        .home-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,9vw,110px);line-height:.9;letter-spacing:-.005em;color:var(--fg)}
-        .home-sub{margin-top:14px;font-size:14px;color:var(--fg-mid);max-width:480px;line-height:1.6}
+        .hero-wrap{padding:0 36px}
+        @media(max-width:768px){.hero-wrap{padding:0 20px}}
+        .hero-word{font-family:'Inter',sans-serif;font-weight:900;font-size:clamp(58px,13.5vw,208px);line-height:.86;letter-spacing:-.03em;color:var(--fg);white-space:nowrap;text-align:center;width:100%;overflow:hidden}
+        .hero-rule{height:1px;background:var(--fg);margin:0 36px 0}
+        @media(max-width:768px){.hero-rule{margin:0 20px}}
+        .strip{display:grid;grid-template-columns:1.1fr .8fr 1fr;gap:32px;padding:28px 36px 48px;align-items:start}
+        @media(max-width:860px){.strip{grid-template-columns:1fr;gap:20px;padding:22px 20px 36px}}
+        .strip-eyebrow{font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-mid);margin-bottom:10px}
+        .strip-copy{font-size:13.5px;color:var(--fg);line-height:1.65;max-width:340px}
+        .strip-center{text-align:center;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-mid);align-self:center}
+        @media(max-width:860px){.strip-center{text-align:left}}
+        .strip-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+        @media(max-width:860px){.strip-right{align-items:flex-start}}
+        .strip-tag{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--fg)}
+        .strip-tag-line{width:22px;height:1px;background:var(--fg-dim)}
+        .strip-est{font-size:11px;color:var(--fg-mid);letter-spacing:.08em}
       `}</style>
-      <section className="home-hero">
-        <div className="home-title">NORTHÉA</div>
-        <p className="home-sub">Ropa, artículos y belleza — todo nuevo y original. Piezas seleccionadas, disponibilidad real, sin sorpresas.</p>
-      </section>
+
+      <div className="hero-wrap">
+        <h1 className="hero-word">NORTHÉA</h1>
+      </div>
+      <div className="hero-rule" />
+
+      <div className="strip">
+        <div>
+          <div className="strip-eyebrow">Our Philosophy</div>
+          <p className="strip-copy">Ropa, artículos y belleza de USA — todo nuevo y original. Piezas seleccionadas con propósito, disponibilidad real, sin sorpresas.</p>
+        </div>
+        <div className="strip-center">NORTHÉA · EST. 2026</div>
+        <div className="strip-right">
+          <div className="strip-tag"><span className="strip-tag-line" />NORTHÉA</div>
+          <div className="strip-est">EST. MMXXVI<span style={{display:'inline-block',width:22,height:1,background:'var(--fg-dim)',verticalAlign:'middle',marginLeft:8}} /></div>
+        </div>
+      </div>
+
       <ProductGrid products={products} categories={categories} initialCategory={categoria ?? 'all'} />
     </>
   )
