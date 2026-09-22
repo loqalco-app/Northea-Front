@@ -28,8 +28,8 @@ export default function SearchResultsClient({ products, query }: { products: Pro
       .then(r => r.json()).then(d => setStock(d.stock ?? {})).catch(() => {})
   }, [results])
 
-  async function quickAdd(p: ProductT) {
-    const v = p.product_variants.find(vv => (stock[vv.id] ?? 0) > 0) ?? p.product_variants[0]
+  async function quickAdd(p: ProductT, variantId: string) {
+    const v = p.product_variants.find(vv => vv.id === variantId)
     if (!v) return
     setAdding(p.id)
     const img = primaryImage(p.product_images)

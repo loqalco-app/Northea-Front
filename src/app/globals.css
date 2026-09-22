@@ -35,7 +35,7 @@ body {
 }
 
 /* ── Shared product card (Home bento grid + category landing pages) ── */
-.pcard{display:flex;flex-direction:column;gap:10px;height:100%}
+.pcard{position:relative;display:flex;flex-direction:column;gap:10px;height:100%}
 .pcard-img-wrap{position:relative;flex:1;min-height:0;background:var(--border);overflow:hidden;display:block}
 .pcard-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
 .pcard:hover .pcard-img-wrap img{transform:scale(1.03)}
@@ -47,6 +47,11 @@ body {
 .pcard-add{position:absolute;bottom:10px;right:10px;width:36px;height:36px;border-radius:50%;background:var(--surface);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.15);color:var(--fg);transition:transform .12s}
 .pcard-add:hover{transform:scale(1.08)}
 .pcard-add:disabled{opacity:.4;cursor:not-allowed}
+.pcard-variant-pop{position:absolute;bottom:54px;right:10px;z-index:6;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:8px;min-width:130px;box-shadow:0 10px 28px rgba(0,0,0,0.18);display:flex;flex-direction:column;gap:2px}
+.pcard-variant-pop-lbl{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-dim);padding:4px 8px 6px}
+.pcard-variant-opt{text-align:left;background:none;border:none;border-radius:6px;padding:8px 8px;font-size:12.5px;font-weight:600;color:var(--fg);cursor:pointer;white-space:nowrap}
+.pcard-variant-opt:hover{background:var(--surface)}
+.pcard-variant-opt:disabled{color:var(--fg-dim);text-decoration:line-through;cursor:not-allowed}
 .pcard-info{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-shrink:0}
 .pcard-name{font-size:13.5px;font-weight:600;color:var(--fg);line-height:1.3}
 .pcard-price-wrap{display:flex;align-items:baseline;gap:6px;flex-shrink:0;white-space:nowrap}

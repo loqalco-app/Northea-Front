@@ -44,8 +44,8 @@ export default function ProductGrid({ products, featured, categories, initialCat
   const bento = sort === 'featured'
   const shown = filtered.slice(0, visible)
 
-  async function quickAdd(p: ProductT) {
-    const v = p.product_variants.find(vv => (stock[vv.id] ?? 0) > 0) ?? p.product_variants[0]
+  async function quickAdd(p: ProductT, variantId: string) {
+    const v = p.product_variants.find(vv => vv.id === variantId)
     if (!v) return
     setAdding(p.id)
     const img = [...p.product_images].sort((a, b) => (b.is_primary ? 1 : -1) || a.sort_order - b.sort_order)[0]
