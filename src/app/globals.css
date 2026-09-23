@@ -35,7 +35,8 @@ body {
 }
 
 /* ── Shared product card (Home bento grid + category landing pages) ── */
-.pcard{position:relative;display:flex;flex-direction:column;gap:10px;height:100%}
+.pcard{display:flex;flex-direction:column;gap:10px;height:100%}
+.pcard-media{position:relative;flex:1;min-height:0;display:flex}
 .pcard-img-wrap{position:relative;flex:1;min-height:0;background:var(--border);overflow:hidden;display:block}
 .pcard-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
 .pcard:hover .pcard-img-wrap img{transform:scale(1.03)}
