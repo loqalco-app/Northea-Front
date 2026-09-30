@@ -35,7 +35,7 @@ export default function Footer() {
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 22v-8.5h2.85l.43-3.31H13.5V8.1c0-.96.27-1.61 1.64-1.61h1.75V3.53C16.57 3.44 15.4 3.33 14.03 3.33c-2.86 0-4.82 1.75-4.82 4.95v2.9H6.35v3.31H9.2V22h4.3z"/></svg>
             </a>
           </div>
-          <p className="footer-copy">© {new Date().getFullYear()} Northéa · Lucero Herrera Hernández. Todos los derechos reservados.</p>
+          <p className="footer-copy">© {new Date().getFullYear()} Northéa. Todos los derechos reservados.</p>
         </div>
       </footer>
     </>
