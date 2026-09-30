@@ -1,9 +1,8 @@
 'use client'
 
-const PHONE = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? ''
+const PHONE = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '525523976633'
 
 export default function WhatsAppButton() {
-  if (!PHONE) return null
   const href = `https://wa.me/${PHONE}?text=${encodeURIComponent('Hola, tengo una duda sobre un producto de NORTHÉA')}`
 
   return (
