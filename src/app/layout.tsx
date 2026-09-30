@@ -4,6 +4,7 @@ import { CartProvider } from '@/lib/cart'
 import Header from '@/components/Header'
 import CartDrawer from '@/components/CartDrawer'
 import WhatsAppButton from '@/components/WhatsAppButton'
+import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
   title: 'NORTHÉA',
@@ -41,6 +42,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <CartProvider>
           <Header categories={categories} />
           {children}
+          <Footer />
           <CartDrawer />
           <WhatsAppButton />
         </CartProvider>
