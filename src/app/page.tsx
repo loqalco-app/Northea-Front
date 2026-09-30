@@ -1,22 +1,22 @@
 import ProductGrid from '@/components/ProductGrid'
-import type { ProductT, CategoryT } from '@/lib/types'
+import type { ProductT } from '@/lib/types'
 
 export const dynamic = 'force-dynamic'
 
-async function getCatalog(): Promise<{ products: ProductT[]; categories: CategoryT[]; featured: ProductT[] }> {
+async function getFeatured(): Promise<ProductT[]> {
   const base = process.env.NEXT_PUBLIC_ERP_URL
   const org = process.env.NEXT_PUBLIC_STORE_ORG_ID
-  if (!base || !org) return { products: [], categories: [], featured: [] }
+  if (!base || !org) return []
   try {
     const res = await fetch(`${base}/api/store/products?org=${org}`, { cache: 'no-store' })
-    if (!res.ok) return { products: [], categories: [], featured: [] }
-    return res.json()
-  } catch { return { products: [], categories: [], featured: [] } }
+    if (!res.ok) return []
+    const data = await res.json()
+    return data.featured ?? []
+  } catch { return [] }
 }
 
-export default async function HomePage({ searchParams }: { searchParams: Promise<{ categoria?: string }> }) {
-  const { products, categories, featured } = await getCatalog()
-  const { categoria } = await searchParams
+export default async function HomePage() {
+  const featured = await getFeatured()
 
   return (
     <>
@@ -60,7 +60,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
         </div>
       </div>
 
-      <ProductGrid products={products} featured={featured} categories={categories} initialCategory={categoria ?? 'all'} />
+      <ProductGrid featured={featured} />
     </>
   )
 }

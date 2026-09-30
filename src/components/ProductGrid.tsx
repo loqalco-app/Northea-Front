@@ -2,44 +2,36 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useCart } from '@/lib/cart'
 import ProductCard from './ProductCard'
-import type { ProductT, CategoryT } from '@/lib/types'
+import type { ProductT } from '@/lib/types'
 
 const ERP = process.env.NEXT_PUBLIC_ERP_URL
 const PAGE_SIZE = 9
 
-export default function ProductGrid({ products, featured, categories, initialCategory }: { products: ProductT[]; featured: ProductT[]; categories: CategoryT[]; initialCategory: string }) {
+export default function ProductGrid({ featured }: { featured: ProductT[] }) {
   const { addItem } = useCart()
-  const [activeCat, setActiveCat] = useState(initialCategory)
   const [sort, setSort] = useState<'featured' | 'price-asc' | 'price-desc'>('featured')
   const [stock, setStock] = useState<Record<string, number>>({})
   const [adding, setAdding] = useState<string | null>(null)
   const [visible, setVisible] = useState(PAGE_SIZE)
 
-  const roots = categories.filter(c => !c.parent_id)
-
   useEffect(() => {
-    const ids = products.flatMap(p => p.product_variants.map(v => v.id))
+    const ids = featured.flatMap(p => p.product_variants.map(v => v.id))
     if (!ids.length || !ERP) return
     fetch(`${ERP}/api/store/stock?variant_ids=${ids.join(',')}`)
       .then(r => r.json()).then(d => setStock(d.stock ?? {})).catch(() => {})
-  }, [products])
+  }, [featured])
 
-  useEffect(() => { setVisible(PAGE_SIZE) }, [activeCat, sort])
+  useEffect(() => { setVisible(PAGE_SIZE) }, [sort])
 
   const filtered = useMemo(() => {
-    // "Todo" shows the curated Home selection when one exists; any specific
-    // category tab always browses the full catalog for that category.
-    let list = activeCat === 'all'
-      ? (featured.length > 0 ? featured : products)
-      : products.filter(p => {
-          const cat = categories.find(c => c.slug === activeCat)
-          return cat && p.category_ids.includes(cat.id)
-        })
+    // El Home muestra únicamente lo marcado con la estrella en Catálogo —
+    // sin fallback a "todo el catálogo" y sin tabs de categoría.
+    let list = featured
     const priceOf = (p: ProductT) => Math.min(...p.product_variants.map(v => v.sale_price))
     if (sort === 'price-asc') list = [...list].sort((a, b) => priceOf(a) - priceOf(b))
     if (sort === 'price-desc') list = [...list].sort((a, b) => priceOf(b) - priceOf(a))
     return list
-  }, [products, featured, activeCat, sort, categories])
+  }, [featured, sort])
 
   const bento = sort === 'featured'
   const shown = filtered.slice(0, visible)
@@ -60,11 +52,8 @@ export default function ProductGrid({ products, featured, categories, initialCat
   return (
     <>
       <style>{`
-        .pg-tabs{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 36px;margin-bottom:28px;flex-wrap:wrap}
+        .pg-tabs{display:flex;align-items:center;justify-content:flex-end;gap:16px;padding:0 36px;margin-bottom:28px}
         @media(max-width:768px){.pg-tabs{padding:0 20px}}
-        .pg-tab-row{display:flex;gap:6px;flex-wrap:wrap}
-        .pg-tab{padding:8px 16px;font-size:12px;font-weight:600;letter-spacing:.04em;border:1px solid var(--border);background:transparent;color:var(--fg-mid);cursor:pointer;border-radius:2px;white-space:nowrap}
-        .pg-tab.active{background:var(--fg);color:var(--bg);border-color:var(--fg)}
         .pg-sort{padding:8px 12px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--bg);color:var(--fg);border-radius:2px}
 
         .pg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px 20px;padding:0 36px 40px;grid-auto-flow:dense}
@@ -88,24 +77,17 @@ export default function ProductGrid({ products, featured, categories, initialCat
         .pg-empty{padding:100px 20px;text-align:center;color:var(--fg-mid);font-size:14px}
       `}</style>
 
-      <div className="pg-tabs">
-        <div className="pg-tab-row">
-          <button className={`pg-tab${activeCat === 'all' ? ' active' : ''}`} onClick={() => setActiveCat('all')}>Todo</button>
-          {roots.map(c => (
-            <button key={c.id} className={`pg-tab${activeCat === c.slug ? ' active' : ''}`} onClick={() => setActiveCat(c.slug)}>{c.name}</button>
-          ))}
-        </div>
-        <select className="pg-sort" value={sort} onChange={e => setSort(e.target.value as typeof sort)}>
-          <option value="featured">Destacados</option>
-          <option value="price-asc">Precio: menor a mayor</option>
-          <option value="price-desc">Precio: mayor a menor</option>
-        </select>
-      </div>
-
       {filtered.length === 0 ? (
-        <div className="pg-empty">Aún no hay productos en esta categoría.</div>
+        <div className="pg-empty">Aún no hay productos destacados — márcalos con la estrella en Catálogo.</div>
       ) : (
         <>
+          <div className="pg-tabs">
+            <select className="pg-sort" value={sort} onChange={e => setSort(e.target.value as typeof sort)}>
+              <option value="featured">Destacados</option>
+              <option value="price-asc">Precio: menor a mayor</option>
+              <option value="price-desc">Precio: mayor a menor</option>
+            </select>
+          </div>
           <div className="pg-grid">
             {shown.map((p, i) => (
               <div key={p.id} className={`pg-cell${bento && i % 3 === 0 ? ' wide' : ''}`}>
