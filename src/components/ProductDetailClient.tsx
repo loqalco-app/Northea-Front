@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useCart } from '@/lib/cart'
 
 interface Variant { id: string; name: string; sku: string; sale_price: number; regular_price: number | null; quantity_disponible: number; in_stock: boolean }
-interface Image { url: string; is_primary: boolean; sort_order: number; alt_text: string | null }
+interface Image { url: string; is_primary: boolean; sort_order: number; alt_text: string | null; variant_id: string | null }
 interface Category { id: string; parent_id: string | null; name: string; slug: string }
 interface Product { id: string; name: string; slug: string; description: string | null; product_variants: Variant[]; product_images: Image[]; categories: Category[] }
 
@@ -47,7 +47,18 @@ export default function ProductDetailClient({ product }: { product: Product }) {
   const [added, setAdded] = useState(false)
   const [activeImgIdx, setActiveImgIdx] = useState(0)
 
-  const images = useMemo(() => [...product.product_images].sort((a, b) => (b.is_primary ? 1 : -1) || a.sort_order - b.sort_order), [product.product_images])
+  const images = useMemo(() => {
+    const all = [...product.product_images].sort((a, b) => (b.is_primary ? 1 : -1) || a.sort_order - b.sort_order)
+    if (!hasColors) return all
+    // Solo las fotos de las variantes del color activo — si ese color no
+    // tiene ninguna foto propia etiquetada, cae de vuelta a mostrar todas
+    // en vez de dejar la galería vacía.
+    const variantIds = new Set(activeVariants.map(v => v.id))
+    const forColor = all.filter(img => img.variant_id && variantIds.has(img.variant_id))
+    return forColor.length > 0 ? forColor : all
+  }, [product.product_images, hasColors, activeVariants])
+
+  useEffect(() => { setActiveImgIdx(0) }, [activeColor])
 
   const price = selectedVariant?.sale_price ?? product.product_variants[0]?.sale_price ?? 0
   const regular = selectedVariant?.regular_price ?? null
