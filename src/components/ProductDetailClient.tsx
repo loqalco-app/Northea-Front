@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useMemo, useState } from 'react'
+import Image from 'next/image'
 import { useCart } from '@/lib/cart'
 
 interface Variant { id: string; name: string; sku: string; sale_price: number; regular_price: number | null; quantity_disponible: number; in_stock: boolean }
@@ -120,13 +121,22 @@ export default function ProductDetailClient({ product }: { product: Product }) {
         <div>
           <div className="pd-gallery-main">
             {discPct !== null && <span className="pd-gallery-disc">-{discPct}%</span>}
-            {images[activeImgIdx] ? <img src={images[activeImgIdx].url} alt={product.name} /> : null}
+            {images[activeImgIdx] ? (
+              <Image
+                src={images[activeImgIdx].url}
+                alt={product.name}
+                fill
+                sizes="(max-width: 860px) 100vw, 50vw"
+                style={{ objectFit: 'cover' }}
+                priority
+              />
+            ) : null}
           </div>
           {images.length > 1 && (
             <div className="pd-gallery-thumbs">
               {images.map((img, i) => (
                 <div key={i} className={`pd-thumb${i === activeImgIdx ? ' active' : ''}`} onClick={() => setActiveImgIdx(i)}>
-                  <img src={img.url} alt="" />
+                  <Image src={img.url} alt="" width={64} height={80} />
                 </div>
               ))}
             </div>

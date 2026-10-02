@@ -1,5 +1,6 @@
 'use client'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import { ProductT, fmtPrice, isNewProduct, primaryImage } from '@/lib/types'
 
@@ -40,7 +41,15 @@ export default function ProductCard({ product, stock, adding, onQuickAdd, wide }
     <div className={`pcard${wide ? ' pcard-wide' : ''}`} ref={cardRef}>
       <div className="pcard-media">
         <Link href={`/producto/${product.slug}`} className="pcard-img-wrap" style={{ textDecoration: 'none' }}>
-          {img ? <img src={img.url} alt={img.alt_text ?? product.name} /> : <div className="pcard-noimg">Sin foto</div>}
+          {img ? (
+            <Image
+              src={img.url}
+              alt={img.alt_text ?? product.name}
+              fill
+              sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              style={{ objectFit: 'cover' }}
+            />
+          ) : <div className="pcard-noimg">Sin foto</div>}
           {discPct !== null && <span className="pcard-disc-tag">-{discPct}%</span>}
           {discPct === null && isNewProduct(product.created_at) && <span className="pcard-tag">Nuevo</span>}
           {soldOut && <div className="pcard-sold-out"><span>Agotado</span></div>}
